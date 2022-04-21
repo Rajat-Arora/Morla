@@ -53,6 +53,7 @@ unsigned long previousMillis;
 int loopTime = 10;
 
 //Encoder pin definations
+#define baudRate_ROSserial 19200
 
 #define encoder0PinA 2
 #define encoder0PinB 4
@@ -91,9 +92,9 @@ ros::Subscriber<geometry_msgs::Twist> sub("/cmd_vel", &velocity_callback);
 
 void setup() {
   nh.loginfo("In setup1");
-  Serial.begin(19200);
+  //Serial.begin(19200);
   nh.initNode();
-  nh.getHardware()->setBaud(19200);
+  nh.getHardware()->setBaud(baudRate_ROSserial);
   nh.loginfo("In setup2");
   nh.subscribe(sub);
 //  nh.advertise(speed_pub);
