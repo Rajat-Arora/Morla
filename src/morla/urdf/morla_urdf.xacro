@@ -35,7 +35,7 @@
     <visual name='chassis_visual'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <mesh filename="package://morla/meshes/morla_final1.dae" scale="1 1 1"/>
+        <mesh filename="package://morla/meshes/morla_chassis.dae" scale="1 1 1"/>
       </geometry>
     </visual>
   </link>
@@ -44,7 +44,7 @@
     <pose>0 0 0 0 0 0</pose>
 
     <inertial>
-      <mass value="1.35"/>
+      <mass value="5.35"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia
           ixx="0.000225" ixy="0" ixz="0"
@@ -56,7 +56,7 @@
     <collision name='right_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://morla/meshes/wheel1.dae" scale="1 1 1"/>
+        <mesh filename="package://morla/meshes/wheel.dae" scale="1 1 1"/>
         <!--<cylinder radius="0.065" length="0.015"/>-->
       </geometry>
     </collision>
@@ -64,7 +64,7 @@
     <visual name='right_wheel_visual'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://morla/meshes/wheel1.dae" scale="1 1 1"/>
+        <mesh filename="package://morla/meshes/wheel.dae" scale="1 1 1"/>
         <!--<cylinder radius="0.05" length="0.015"/>-->
       </geometry>
       <!--<material name="black"/>-->
@@ -75,7 +75,7 @@
     <pose>0 0 0 0 0 0</pose>
 
     <inertial>
-      <mass value="1.35"/>
+      <mass value="5.35"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <inertia
           ixx="0.000225" ixy="0" ixz="0"
@@ -87,7 +87,7 @@
     <collision name='left_wheel_collision'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://morla/meshes/wheel1.dae" scale="1 1 1"/>
+        <mesh filename="package://morla/meshes/wheel.dae" scale="1 1 1"/>
         <!--<cylinder radius="0.065" length="0.015"/>-->
       </geometry>
     </collision>
@@ -95,7 +95,7 @@
     <visual name='left_wheel_visual'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://morla/meshes/wheel1.dae" scale="1 1 1"/>
+        <mesh filename="package://morla/meshes/wheel.dae" scale="1 1 1"/>
         <!--<cylinder radius="0.05" length="0.015"/>-->
       </geometry>
       <!--<material name="black"/>-->
@@ -151,7 +151,7 @@
     <collision name='LIDAR_collision'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.01 0.01 0.01"/>
+        <box size="0.02 0.02 0.02"/>
         <!--<mesh filename="package://morla/meshes/.dae"/>-->
       </geometry>
     </collision>
@@ -159,7 +159,7 @@
     <visual name='LIDAR_visual'>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.01 0.01 0.01"/>
+        <box size="0.02 0.02 0.02"/>
         <!--<mesh filename="package://morla/meshes/hokuyo.dae"/>-->
       </geometry>
     </visual>
@@ -168,7 +168,7 @@
 <!-- joints -->
 
   <joint name="LIDAR_joint" type="fixed">
-    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    <origin xyz="0 0 0.08" rpy="0 0 0"/>
     <parent link="morla_chassis"/>
     <child link="LIDAR"/>
   </joint>
@@ -177,7 +177,7 @@
      <origin xyz="-0.0355 -0.097 -0.006" rpy="0 0 1.57"/>
      <child link="right_wheel"/>
      <parent link="morla_chassis"/>
-     <axis xyz="0 0 1" rpy="0 0 0"/>
+     <axis xyz="1 0 0" rpy="0 0 0"/>
      <limit effort="10000" velocity="1000"/>
      <dynamics damping="1.0" friction="1.0"/>
  </joint>
@@ -185,7 +185,7 @@
      <origin xyz="-0.0355 0.097 -0.006" rpy="0 0 -1.57"/>
      <child link="left_wheel"/>
      <parent link="morla_chassis"/>
-     <axis xyz="1 0 0" rpy="0 0 0"/>
+     <axis xyz="-1 0 0" rpy="0 0 0"/>
      <limit effort="10000" velocity="1000"/>
      <dynamics damping="1.0" friction="1.0"/>
   </joint>
@@ -194,7 +194,7 @@
     <origin xyz="0.133497 0 -0.024" rpy="0.000212 -0.118296 -0.001802"/>
     <child link="omni_wheel"/>
     <parent link="morla_chassis"/>
-    <axis xyz="1 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1" rpy="0 0 0"/>
     <limit effort="10000" velocity="1000"/>
     <dynamics damping="1.0" friction="1.0"/>
   </joint>

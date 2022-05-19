@@ -26,10 +26,10 @@
     </plugin>
   </gazebo>
 
- <gazebo reference="hokuyo">
+ <gazebo reference="LIDAR">
     <sensor type="ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
-      <visualize>false</visualize>
+      <visualize>true</visualize>
       <update_rate>40</update_rate>
       <ray>
         <scan>
