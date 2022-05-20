@@ -3,6 +3,9 @@
 <robot name="morla" xmlns:xacro="http://www.ros.org/wiki/xacro">
 <xacro:include filename="$(find morla)/urdf/morla_urdf.gazebo" />
 
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
 
   <link name='robot_footprint'> </link>
 
@@ -28,7 +31,7 @@
     <collision name='chassis_collision'>
       <origin xyz="0 0 0" rpy=" 0 0 0"/>
       <geometry>
-        <box size="0.45469 0.28810 0.089"/>
+        <mesh filename="package://morla/meshes/morla_chassis.dae" scale="1 1 1"/>
       </geometry>
     </collision>
 
