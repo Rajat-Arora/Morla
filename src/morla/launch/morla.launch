@@ -33,4 +33,14 @@
  <!-- Launching rviz -->
  <node pkg="rviz" type="rviz" name="rviz" respawn="false" args="-d $(find morla)/config/rvizMorla.rviz"/>
 
+
+<node name="cartographer_node" pkg="cartographer_ros"
+     type="cartographer_node" args="
+    -configuration_directory $(find cartographer_ros)/configuration_files
+    -configuration_basename pr2.lua"
+     output="screen">
+  </node>
+
+ <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" args="-resolution 0.01" />
+
 </launch>
