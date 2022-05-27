@@ -11,4 +11,4 @@ Its main processing unit is a Raspberry Pi 4 B running Ubuntu 18.04 and the ROS 
 
 | Running teleoperation with rosserial |
 |:-------:|
-<img src="media/morlaTemp2.gif" width = "30%" height = "30%"/>
+
