@@ -57,7 +57,7 @@
       </ray>
       <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
         <topicName>/scan</topicName>
-        <frameName>hokuyo</frameName>
+        <frameName>LIDAR</frameName>
       </plugin>
     </sensor>
   </gazebo>
