@@ -10,4 +10,4 @@ Its main processing unit is a Raspberry Pi 4 B running Ubuntu 18.04 and the ROS 
 
 | Running teleoperation with rosserial | SLAM using Google Cartographer(Partial) |
 |:-------:|:-----------------:|
-|<img src="media/morla_teleop.gif" width="750" height = "300"/> | <img src="https://user-images.githubusercontent.com/97186785/170633482-032d4c19-f23a-491f-96ae-c1397b1d0e2e.png" width="650" height = "300"/> |
+|<img src="media/morla_teleop.gif" width="500" height = "300"/> | <img src="https://user-images.githubusercontent.com/97186785/170633482-032d4c19-f23a-491f-96ae-c1397b1d0e2e.png" width="650" height = "300"/> |
