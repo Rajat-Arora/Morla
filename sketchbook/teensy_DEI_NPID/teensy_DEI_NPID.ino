@@ -6,7 +6,7 @@
 #include <geometry_msgs/Twist.h>
 #include <string.h>
 #include<sensor_msgs/Imu.h>
-#include<std_msgs/Int16.h>
+#include<std_msgs/Int32.h>
 #include <PID_v1.h>
 #include <TeensyThreads.h>
 #include <Encoder.h>
@@ -29,8 +29,8 @@ int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
 ros::NodeHandle nh;
 
 sensor_msgs::Imu imu_msg;
-std_msgs::Int16 left_ticks;
-std_msgs::Int16 right_ticks;
+std_msgs::Int32 left_ticks;
+std_msgs::Int32 right_ticks;
 
 void velocity_callback(const geometry_msgs::Twist& velocity); //Forward declaration of velocity_callback
 
@@ -48,7 +48,7 @@ ros::Subscriber<geometry_msgs::Twist> sub("/cmd_vel", &velocity_callback);
 double Setpoint1, Input1, Output1, Output1a;
 
 //Specify the links and initial tuning parameters
-double Kp1=2.8, Ki1=0.009, Kd1=0.002;
+double Kp1=1.8, Ki1=0.008, Kd1=0.002;
 PID PID_MotorA(&Input1, &Output1, &Setpoint1, Kp1, Ki1, Kd1, DIRECT);
 
 //------------Motor2_PID-----------------
@@ -57,7 +57,7 @@ PID PID_MotorA(&Input1, &Output1, &Setpoint1, Kp1, Ki1, Kd1, DIRECT);
 double Setpoint2, Input2, Output2, Output2a;
 
 //Specify the links and initial tuning parameters
-double Kp2=2.8, Ki2=0.009, Kd2=0.002;
+double Kp2=1.8, Ki2=0.008, Kd2=0.002;
 PID PID_MotorB(&Input2, &Output2, &Setpoint2, Kp2, Ki2, Kd2, DIRECT);
 
 
@@ -109,7 +109,7 @@ void velocity_callback(const geometry_msgs::Twist& velocity){
     nh.loginfo("in callback");
 
     demandx = constrain(demandx, -0.5, 0.5);
-    demandz = constrain(demandz, -1, 1);
+    demandz = constrain(demandz, -3, 3);
     
 }
 
@@ -160,7 +160,7 @@ void imu_to_ros() {
 void encoderLeft_to_ros(){
  while(1){
   
-  left_ticks.data = int(encoder0Pos);
+  left_ticks.data = encoder0Pos;
   //nh.loginfo(String(encoder0Pos).c_str());
   _left_encoder.publish(&left_ticks);
   
@@ -173,7 +173,7 @@ void encoderLeft_to_ros(){
 void encoderRight_to_ros(){
  while(1){
   
-  right_ticks.data = int(encoder1Pos);
+  right_ticks.data = encoder1Pos;
   //nh.loginfo(String(encoder1Pos).c_str());
   _right_encoder.publish(&right_ticks);
   
@@ -287,8 +287,8 @@ void loop()
     previousMillis = currentMillis;
 
     // work out the two values for differential drive of each wheel
-    demand1 = demandx + (demandz*0.145); //change acccording to robot and application
-    demand2 = demandx - (demandz*0.145);
+    demand1 = demandx + (demandz*0.0975); //change acccording to robot and application
+    demand2 = demandx - (demandz*0.0975);
     
 //    nh.loginfo(int(demandx));
 //    nh.loginfo(int(demandz));
@@ -296,19 +296,19 @@ void loop()
     encoder0Diff = encoder0Pos - encoder0Prev;
     encoder1Diff = encoder1Pos - encoder1Prev;
     
-    encoder0Error = (demand1*129) - encoder0Diff;
-    encoder1Error = (demand2*129) - encoder1Diff;
+    encoder0Error = (demand1*1045) - encoder0Diff; //104500
+    encoder1Error = (demand2*1055) - encoder1Diff; //105562
   
     encoder0Prev = encoder0Pos;
     encoder1Prev = encoder1Pos;
 //    nh.loginfo(String(demand1).c_str());
 //    nh.loginfo(String(demand2).c_str());
     // drive wheel 1 at 129 counts per
-    Setpoint1 = demand1*500;
+    Setpoint1 = demand1*1045;
     Input1 = encoder0Diff;
     PID_MotorA.Compute();
 
-    Setpoint2 = demand2*500;
+    Setpoint2 = demand2*1055;
     Input2 = encoder1Diff;
     PID_MotorB.Compute();
 
